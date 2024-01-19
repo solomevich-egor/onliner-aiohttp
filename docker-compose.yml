@@ -1,0 +1,30 @@
+version: "3.3"
+
+services:
+    db:
+        container_name: mongodb
+        image: mongo:latest
+        volumes:
+            - app-db-data:/data/db
+        env_file:
+            - .env
+        ports:
+            - "${MONGO_PORT}:${MONGO_PORT}"
+        environment:
+            - "MONGO_INITDB_DATABASE=${MONGO_DB}"
+            - "MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}"
+            - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}"
+    
+    app:
+        container_name: app
+        depends_on:
+            - db
+        volumes:
+            - ./app:/app
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+
+
+volumes:
+    app-db-data:

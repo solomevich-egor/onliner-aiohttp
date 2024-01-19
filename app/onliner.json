@@ -1,0 +1,5 @@
+{
+    "https://catalog.onliner.by/sdapi/catalog.api": {
+        "search/ssd": {"limit": 10}
+    }
+}
