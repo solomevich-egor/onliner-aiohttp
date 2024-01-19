@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
-from typing import AsyncIterator, Dict, List
+from typing import AsyncIterator, Dict, List, Self
 
 import aiohttp
 from fake_useragent import UserAgent
@@ -28,10 +28,10 @@ class OnlinerClient(BaseClient):
     async def close(self) -> None:
         return await self._client.close()
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> Self:
         return self
 
-    async def __aexit__(self) -> None:
+    async def __aexit__(self, type, value, traceback) -> None:
         await self._client.close()
 
     def _make_url(self, path: str) -> URL:

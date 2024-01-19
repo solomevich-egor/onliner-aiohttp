@@ -1,4 +1,3 @@
-from typing import Optional
 from uuid import UUID, uuid4
 
 from beanie import Document
@@ -14,9 +13,9 @@ class Pricing(BaseModel):
 
 class Product(Document):
     uuid: UUID = Field(default_factory=uuid4)
-    full_name: Optional[str] = None
-    html_url: Optional[str] = None
-    description: Optional[str] = None
+    full_name: str | None
+    html_url: str | None
+    description: str | None
     price: Pricing
 
     class Settings:
